@@ -101,14 +101,6 @@
         }
       })();
 
-      // User warning on window close
-      window.onbeforeunload = function(e) {
-        if (typeof window.shellinabox.session != "undefined") {
-          return "Are you sure you want to leave this page?";
-        }
-        // Don't use explicit return
-      }
-
     --></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <script type="text/javascript" src="ShellInABox.js"></script>
