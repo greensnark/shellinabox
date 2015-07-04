@@ -251,9 +251,9 @@ html, body {
  */
 [else DEFINES_COLORS]
 /* SYSTEM colors */
-#vt100 .ansiDef   { color:            #000000; }
+#vt100 .ansiDef   { color:            #cccccc; }
 
-#vt100 .ansi0     { color:            #000000; }
+#vt100 .ansi0     { color:            #020202; }
 #vt100 .ansi1     { color:            #cd0000; }
 #vt100 .ansi2     { color:            #00cd00; }
 #vt100 .ansi3     { color:            #cdcd00; }
@@ -513,7 +513,7 @@ html, body {
 #vt100 .ansi255   { color:            #eeeeee; }
 
 /* SYSTEM colors */
-#vt100 .bgAnsiDef { background-color: #ffffff; }
+#vt100 .bgAnsiDef { background-color: #000000; }
 
 #vt100 .bgAnsi0   { background-color: #000000; }
 #vt100 .bgAnsi1   { background-color: #cd0000; }
