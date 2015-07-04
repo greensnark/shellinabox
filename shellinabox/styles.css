@@ -1,3 +1,12 @@
+html, body {
+  background: #000;
+  color: #aaa;
+}
+
+#vt100 {
+  font-size: 22px;
+}
+
 #vt100 a {
   text-decoration:      none;
   color:                inherit;

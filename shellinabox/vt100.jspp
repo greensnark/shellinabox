@@ -290,7 +290,7 @@ VT100.prototype.getUserSettings = function() {
                               suppressAllAudio;
   this.autoprint            = true;
   this.softKeyboard         = false;
-  this.blinkingCursor       = true;
+  this.blinkingCursor       = false;
   this.disableAlt           = false;
 
   if (navigator.platform.indexOf("Mac") != -1) {
@@ -1424,7 +1424,8 @@ VT100.prototype.mouseEvent = function(event, type) {
   // Bring up context menu.
   if (button == 2 && !event.shiftKey) {
     if (type == MOUSE_DOWN) {
-      this.showContextMenu(position[0], position[1]);
+      // TODO: make this configurable.
+      // this.showContextMenu(position[0], position[1]);
     }
     return this.cancelEvent(event);
   }
@@ -3362,14 +3363,17 @@ VT100.prototype.updateStyle = function() {
     bg         = fg;
     fg         = tmp;
   }
+
+  var bolded = false, blink = false;
   if ((this.attr & (ATTR_REVERSE | ATTR_DIM)) == ATTR_DIM) {
     fg         = 8; // Dark grey
   } else if (this.attr & ATTR_BRIGHT) {
     fg        |= 8;
-    this.style = 'font-weight: bold;';
+    bolded = true;
   }
   if (this.attr & ATTR_BLINK) {
-    this.style = 'text-decoration: blink;';
+    // TODO: Use a setting to disable this:
+    // this.style = 'text-decoration: blink;';
   }
 
   // Default colors
@@ -3388,7 +3392,7 @@ VT100.prototype.updateStyle = function() {
     bg         = this.attrBg;
   }
 
-  this.color   = 'ansi' + fg + ' bgAnsi' + bg;
+  this.color   = 'ansi' + fg + ' bgAnsi' + bg + (bolded ? ' bold' : '');
 };
 
 VT100.prototype.setAttrColors = function(attr) {

@@ -886,9 +886,10 @@ static int forkPty(int *pty, int useLogin, struct Utmp **utmp,
 #ifdef HAVE_LOGIN_TTY
     login_tty(slave);
 #else
+    // TODO: control this with an option
     // Become the session/process-group leader
-    setsid();
-    setpgid(0, 0);
+    // setsid();
+    // setpgid(0, 0);
 
     // Redirect standard I/O to the pty
     dup2(slave, 0);
@@ -1156,7 +1157,10 @@ static pam_handle_t *internalLogin(struct Service *service, struct Utmp *utmp,
 
   if (restricted &&
       (service->uid != (int)restricted || service->gid != (int)pw->pw_gid)) {
-    puts("\nAccess denied!");
+    char buf[5000];
+    snprintf(buf, sizeof buf, "\nAccess denied, my uid: %d, restricted uid: %d, my gid: %d, pw_gid: %d!", service->uid, restricted,
+         service->gid, (int)pw->pw_gid);
+    puts(buf);
 #if defined(HAVE_SECURITY_PAM_APPL_H)
     if (service->authUser != 2 /* SSH */) {
       pam_end(pam, PAM_SUCCESS);
